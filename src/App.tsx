@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import './App.css';
+import TasksContainer from './components/TasksContainer';
 
 
 const Container = styled.div`
   padding: 0;
-  width: 70%;
+  width: 50%;
   margin: 0 auto;
+  border-radius: 10px;
 `;
 
 const Header = styled.h1`
@@ -17,12 +19,14 @@ const Header = styled.h1`
   padding: 0 0 0 20px;
   font-size: 24px;
   color: #4b4b4b;
+  border-radius: inherit;
 `;
 
 const App:React.FC = () => {
   return (
     <Container>
       <Header>ToDos 5</Header>
+      <TasksContainer />
     </Container>
   );
 }
