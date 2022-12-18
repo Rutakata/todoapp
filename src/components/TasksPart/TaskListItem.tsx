@@ -18,7 +18,7 @@ const Container = styled.div`
         text-decoration: none;
         display: flex;
         font-size: 16px;
-        height: 50px;
+        min-height: 50px;
         justify-content: space-between;
         align-items: center;
     }

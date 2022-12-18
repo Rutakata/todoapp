@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import "./App.css";
 import Header from "./components/Header";
 import TasksContainer from "./components/TasksPart/TasksContainer";
+import { useAppDispatch } from "./hooks/reduxHooks";
+import { todoSlice } from "./store/todosReducer";
 
 
 const Container = styled.div`
@@ -21,6 +23,13 @@ const Container = styled.div`
 `;
 
 const App: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const { readTodosFromStorage } = todoSlice.actions;
+
+  useEffect(() => {
+    dispatch(readTodosFromStorage())
+  }, []);
+
   return (
     <Container>
       <Header />
