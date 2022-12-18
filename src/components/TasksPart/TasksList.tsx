@@ -21,11 +21,7 @@ const Container = styled.div`
 const TasksList = () => {
     const {todos} = useAppSelector(state => state.todoReducer);
 
-    if (todos.length === 0) {
-        return (
-            <Container>No todos</Container>
-        )
-    }
+    if (todos.length === 0) return <Container>No todos</Container>
 
     return (
         <Container>

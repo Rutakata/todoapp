@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { BiEdit } from "react-icons/bi";
 import { CgTrash } from "react-icons/cg";
+import { TiTickOutline } from "react-icons/ti";
 import { ITodo, todoSlice } from "../../store/todosReducer";
 import { useAppDispatch } from "../../hooks/reduxHooks";
 
@@ -26,32 +27,42 @@ const Container = styled.div`
         background-color: rgba(0,0,0,.05);
     }
 `
-const EditButton = styled.button`
-    width: 40px;
+
+const Button = styled.button`
+    width: 45px;
     height: 30px;
-    background-color: #28d130;
     border: none;
     border-radius: 5px;
-    box-sizing: border-box;
-    line-height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `
-const DeleteButton = styled.button`
-    width: 40px;
-    height: 30px;
+
+const EditButton = styled(Button)`
+    background-color: #28d130;
+`
+
+const DeleteButton = styled(Button)`
     background-color: #d12828;
-    border: none;
-    border-radius: 5px;
 `
 
 const Checkbox = styled.input`
     width: 15px;
     height: 15px;
+    margin: 0;
+    padding: 0;
 `
 const FlexContainer = styled.div`
-    display: inline-block;
+    display: flex;
 `
 
 const TodoInput = styled.input`
+    border-radius: 2px;
+    border: 1px solid #bababa;
+    height: 20px;
+    width: 60%;
+    padding-left: 5px;
+    font-size: 14px;
 `
 
 
@@ -78,16 +89,19 @@ const TasksListItem = (props: Props) => {
 
     return (
         <Container>
-            <FlexContainer style={{width: "80%"}}>
+            <FlexContainer style={{width: "80%", gap: "5px"}}>
                 <Checkbox type='checkbox' checked={props.todo.finished} onClick={() => dispatch(finishTodo(props.id))}/>
+                
                 { editMode? 
                     <TodoInput type="text" value={newTodoValue} ref={input} onChange={handleInputChange}/> 
                     : props.todo.value }
             </FlexContainer>
-            <FlexContainer style={{width: "15%", display: "flex", gap: "10px"}}>
+
+            <FlexContainer style={{width: "15%", gap: "10px"}}>
                 <EditButton style={{color: 'white'}} onClick={() => handleEditButton(props.id, newTodoValue)}>
-                    <BiEdit size={20}/>
+                    { editMode ? <TiTickOutline size={20} /> : <BiEdit size={20}/> }
                 </EditButton>
+
                 <DeleteButton style={{color: 'white'}} onClick={() => dispatch(deleteTodo(props.id))} disabled={editMode}>
                     <CgTrash size={20}/>
                 </DeleteButton>

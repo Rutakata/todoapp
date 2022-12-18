@@ -27,7 +27,7 @@ export const todoSlice = createSlice({
             localStorage.setItem('todos', JSON.stringify(state.todos));
         },
         finishTodo(state, action: PayloadAction<number>) {
-            state.todos[action.payload].finished = true;
+            state.todos[action.payload].finished = !state.todos[action.payload].finished;
             localStorage.setItem('todos', JSON.stringify(state.todos));
         },
         editTodo(state, action: PayloadAction<{id: number, value: string}>) {
@@ -48,6 +48,7 @@ export const todoSlice = createSlice({
         },
         readTodosFromStorage(state) {
             let storageTodos:string|null = localStorage.getItem("todos");
+            
             if (typeof storageTodos === "string") {
                 state.todos = JSON.parse(storageTodos);
             }
