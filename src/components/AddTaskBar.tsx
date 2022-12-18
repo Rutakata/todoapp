@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
+import { todoSlice } from "../store/todosReducer";
 
 
 const Container = styled.div`
@@ -25,12 +27,20 @@ const Button = styled.button`
 `
 
 const AddTaskBar: React.FC = () => {
-    const [newTask, setNewTask] = useState<string>("");
+    const [newTodoValue, setNewTodoValue] = useState<string>("");
+    const dispatch = useAppDispatch();
+    const { createTodo } = todoSlice.actions;
+    const input = React.useRef<HTMLInputElement>(null);
+
+    const handleInputChange = () => {
+        const current = input.current;
+        setNewTodoValue(current?current.value: "");
+    }
 
     return (
         <Container>
-            <Input type="text" value={newTask} placeholder="Enter todo here"/>
-            <Button>Submit</Button>
+            <Input type="text" value={newTodoValue} ref={input} onChange={handleInputChange} placeholder="Enter todo here" />
+            <Button onClick={() => dispatch(createTodo(newTodoValue))}>Submit</Button>
         </Container>
     )
 };

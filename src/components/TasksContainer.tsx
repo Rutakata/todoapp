@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import AddTaskBar from "./AddTaskBar";
+import TasksList from "./TasksList";
 
 
 const Container = styled.div`
@@ -13,6 +14,7 @@ const TasksContainer: React.FC = () => {
     return (
         <Container>
             <AddTaskBar />
+            <TasksList />
         </Container>
     )
 };
