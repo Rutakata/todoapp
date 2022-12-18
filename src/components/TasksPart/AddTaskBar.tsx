@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
-import { todoSlice } from "../store/todosReducer";
+import { useAppDispatch } from "../../hooks/reduxHooks";
+import { todoSlice } from "../../store/todosReducer";
 
 
 const Container = styled.div`
@@ -13,7 +13,7 @@ const Input = styled.input`
     border-radius: 5px 0 0 5px;
     box-sizing: border-box;
     height: 100%;
-    padding-left: 10px;
+    padding-left: 15px;
     width: 80%
 `
 
@@ -35,12 +35,17 @@ const AddTaskBar: React.FC = () => {
     const handleInputChange = () => {
         const current = input.current;
         setNewTodoValue(current?current.value: "");
-    }
+    };
+
+    const handleSubmitButton = () => {
+        dispatch(createTodo(newTodoValue));
+        setNewTodoValue("");
+    };
 
     return (
         <Container>
             <Input type="text" value={newTodoValue} ref={input} onChange={handleInputChange} placeholder="Enter todo here" />
-            <Button onClick={() => dispatch(createTodo(newTodoValue))}>Submit</Button>
+            <Button onClick={handleSubmitButton}>Submit</Button>
         </Container>
     )
 };
